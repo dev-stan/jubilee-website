@@ -1,0 +1,9 @@
+<div class="offer-card">
+  <div class="position-relative">
+    <%= link_to image_tag(offer.image_url, class: "offer-card-image"), offer_path(offer) %>
+    <%= link_to "From 89.99$", offer_path(offer), class: "btn offer-card-button fw-bold" %>
+  </div>
+  <div class="offer-card-body">
+    <h2 class="offer-card-title"><%= offer.title %></h2>
+  </div>
+</div>

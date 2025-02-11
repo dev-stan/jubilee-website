@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reservation_date: 2025-02-11
+  offer: one
+
+two:
+  reservation_date: 2025-02-11
+  offer: two

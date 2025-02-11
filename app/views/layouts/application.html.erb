@@ -3,11 +3,14 @@
   <head>
     <title>JubileeStore</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= javascript_importmap_tags %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
   <body>
+    <%= render "shared/navbar" %>
     <%= yield %>
   </body>
 </html>

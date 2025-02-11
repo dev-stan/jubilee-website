@@ -5,6 +5,14 @@ ruby "3.1.2"
 gem "sassc-rails"
 
 gem "bootstrap", "~> 5.3.0"
+gem "bootstrap-datepicker-rails"
+gem 'bootstrap-timepicker-rails'
+
+gem "jquery-rails"
+gem "importmap-rails"
+gem "turbo-rails"
+
+
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.5", ">= 7.1.5.1"

@@ -1,0 +1,83 @@
+<%# app/views/offers/show.html.erb %>
+<% if @offer.image_url.present? %>
+  <div class="banner mb-4" style="height:33vh; background: url('<%= @offer.image_url %>') center center / cover no-repeat;"></div>
+<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <div class="offer-details show-box p-3">
+        <h2 class="fw-bolder"><%= @offer.title %></h2>
+        <hr>
+        <div class="offer-description">
+          <p><%= @offer.description %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="show-box mt-4 p-3">
+        <h2 class="fw-bolder fs-4">Rezerwacja</h2>
+        <%= form_for [@offer, @reservation] do |f| %>
+          <div class="mb-3">
+            <%= f.label :reservation_datetime, "Wybierz datę i godzinę" %>
+            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+              <%= f.text_field :reservation_datetime,
+                    class: "form-control datetimepicker-input",
+                    placeholder: "YYYY-MM-DD HH:mm",
+                    data: { target: "#datetimepicker1" } %>
+              <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 d-flex align-items-center">
+            <div class="me-3">
+              <%= f.label :number_of_adults, "Liczba dorosłych" %>
+              <%= f.number_field :number_of_adults, class: "form-control", min: 0 %>
+            </div>
+            <div class="border-start ps-3">
+              <%= f.label :number_of_children, "Liczba dzieci" %>
+              <%= f.number_field :number_of_children, class: "form-control", min: 0 %>
+            </div>
+          </div>
+          <div class="text-center my-3">
+            <%= f.submit "Rezerwuj", class: "btn btn-primary w-100" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="show-box mt-4 p-3">
+        <h2 class="fw-bolder fs-4">Masz pytania?</h2>
+        <p>Jeżeli masz pytania skontaktuj się z zespołem - zadzwoń po 881 228 832</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Inline script for initializing Tempus Dominus -->
+<script>
+  document.addEventListener("turbo:load", function() {
+  $('#datetimepicker1').datetimepicker({
+  format: 'YYYY-MM-DD HH:mm',
+  stepping: 15,
+  sideBySide: true,
+  allowInputToggle: true,
+  // Only allow these dates (use moment objects)
+  enabledDates: [
+    moment("2025-02-12", "YYYY-MM-DD"),
+    moment("2025-02-14", "YYYY-MM-DD")
+  ],
+  // Only allow these hours (24-hour format)
+  enabledHours: [10, 11, 12, 13, 14, 15],
+  icons: {
+    time: 'fas fa-clock',
+    date: 'fas fa-calendar',
+    up: 'fas fa-chevron-up',
+    down: 'fas fa-chevron-down',
+    previous: 'fas fa-chevron-left',
+    next: 'fas fa-chevron-right',
+    today: 'fas fa-sun',
+    clear: 'fas fa-trash',
+    close: 'fas fa-times'
+  }
+  });
+
+
+  });
+</script>

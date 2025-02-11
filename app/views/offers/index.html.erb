@@ -1,1 +1,14 @@
-<div class="btn btn-primary">duoa</div>
+<div class="banner mb-4" style="height:33vh; background:url('https://tripswithrosie.com/wp-content/uploads/2023/01/Rome-Highlights-at-Sunrise-14.jpeg') center center / cover no-repeat;">
+</div>
+<div class="container">
+  <div class="index-title ps-2 pb-4">Available Tours</div>
+  <% @offers.each_slice(3) do |group| %>
+    <div class="row">
+      <% group.each do |offer| %>
+        <div class="col-md-4 mb-4">
+          <%= render partial: "offers/offer_card", locals: { offer: offer } %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

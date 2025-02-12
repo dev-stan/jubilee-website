@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   resources :offers do
     resources :reservations, only: [:create]
   end
-  
+  get 'cart', to: 'carts#show'
 end
  

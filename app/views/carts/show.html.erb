@@ -1,0 +1,4 @@
+<% @reservations.each do |reservation| %>
+  <% offer = Offer.find(reservation.offer_id) %>
+  <%= render "offers/offer_card", offer: offer %>
+<% end %>

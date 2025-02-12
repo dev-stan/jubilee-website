@@ -12,6 +12,7 @@ gem "jquery-rails"
 gem "importmap-rails"
 gem "turbo-rails"
 
+gem 'font-awesome-sass', '~> 6.2.1'
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

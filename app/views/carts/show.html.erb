@@ -1,4 +1,27 @@
-<% @reservations.each do |reservation| %>
-  <% offer = Offer.find(reservation.offer_id) %>
-  <%= render "offers/offer_card", offer: offer %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <div class="offer-details show-box p-3">
+        <h2 class="fw-bolder">Your Cart</h2>
+        <hr>
+        <% @reservations.each do |reservation| %>
+          <% offer = Offer.find(reservation.offer_id) %>
+          <%= render partial: "cart_offer_card", locals: { offer: offer, reservation: reservation } %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="show-box mt-4 p-3">
+        <h2 class="fw-bolder fs-4">Checkout</h2>
+        <div class="text-center my-3">
+          <%= button_to "Buy", root_path, method: :post, class: "btn btn-primary w-100" %>
+        </div>
+      </div>
+      <div class="show-box mt-4 p-3">
+        <h2 class="fw-bolder fs-4">Masz pytania?</h2>
+        <p>Jeżeli masz pytania skontaktuj się z zespołem - zadzwoń po 881 228 832</p>
+        <i class="fas fa-trash-alt"></i>
+      </div>
+    </div>
+  </div>
+</div>

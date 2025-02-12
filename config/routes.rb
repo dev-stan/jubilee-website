@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :offers do
     resources :reservations, only: [:create]
   end
-  
+  get 'cart', to: 'carts#show'
+  delete 'cart/reservations/:id', to: 'carts#destroy', as: :cart_reservation
+
 end
  

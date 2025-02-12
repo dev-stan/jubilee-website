@@ -4,15 +4,6 @@
 
 @import "offer_card";
 @import "titles";
-/* Enabled dates */
-.datetimepicker table td.day:not(.disabled) {
-    background-color: green !important;
-    color: #fff !important;
-  }
-  
-  /* Disabled dates */
-  .datetimepicker table td.day.disabled {
-    background-color: red !important;
-    color: #fff !important;
-  }
-  
+@import "cart_offer_card";
+
+@import "font-awesome";

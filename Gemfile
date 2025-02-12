@@ -8,6 +8,9 @@ gem "bootstrap", "~> 5.3.0"
 gem "bootstrap-datepicker-rails"
 gem 'bootstrap-timepicker-rails'
 
+gem 'rails_admin'
+
+
 gem "jquery-rails"
 gem "importmap-rails"
 gem "turbo-rails"
@@ -83,3 +86,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+gem "cssbundling-rails"
+gem "cssbundling-rails"
+gem "cssbundling-rails"
+gem "cssbundling-rails"
+gem "cssbundling-rails"
+gem "cssbundling-rails"

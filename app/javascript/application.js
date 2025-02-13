@@ -7,7 +7,6 @@ import "bootstrap-datepicker"
 window.$ = window.jQuery = jQuery
 
 document.addEventListener("turbo:load", () => {
-  // Initialize datepicker once DOM is loaded
   $('.datepicker').datepicker({
     format: 'yyyy-mm-dd',
     autoclose: true,

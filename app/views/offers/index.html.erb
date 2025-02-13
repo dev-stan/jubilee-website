@@ -1,9 +1,21 @@
-<div class="banner mb-4" style="height:50vh; background:url('https://tripswithrosie.com/wp-content/uploads/2023/01/Rome-Highlights-at-Sunrise-14.jpeg') center center / cover no-repeat;">
+<div class="banner position-relative mb-4" style="height:50vh;">
+  <div style="position: absolute; inset: 0; background:url('https://tripswithrosie.com/wp-content/uploads/2023/01/Rome-Highlights-at-Sunrise-14.jpeg') center center / cover no-repeat;"></div>
+  <div style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4);"></div>
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-md-8 text-white position-relative" style="z-index: 1;">
+        <span class="badge bg-primary mb-2" style="background-color: #FFB833 !important;">Jubilee 2025</span>
+        <h1 class="display-4 fw-bold mb-3" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Experience the Holy Year in Rome</h1>
+        <p class="lead mb-4" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">Join thousands of pilgrims for this once-in-a-generation spiritual journey</p>
+        <a href="#tours" class="btn btn-lg px-4 py-2 fw-semibold" style="background-color: #FFB833;">Explore Tours</a>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="pt-5" style="padding-left: 200px; padding-right: 200px;">
   <div class="index-title ps-2 fw-bolder pb-5">Available Tours</div>
   <% @offers.each_slice(3) do |group| %>
-    <div class="row">
+    <div class="row">  <!-- Remove the # from id="#tours" -->
       <% group.each do |offer| %>
         <div class="col-md-4 mb-4">
           <%= render partial: "offers/offer_card", locals: { offer: offer } %>
@@ -12,7 +24,8 @@
     </div>
   <% end %>
 </div>
-<div class="container pt-5">
+<div class="tours-scroll"  id="tours"></div>
+<div class="container pt-5" >
   <div class="row mb-5 mt-5">
     <div class="col-6 d-flex flex-column gap-4">
       <div class="show-box p-5">

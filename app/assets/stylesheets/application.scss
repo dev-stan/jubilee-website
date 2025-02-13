@@ -11,3 +11,9 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 @import "offer_card";
 @import "titles";
 @import "cart_offer_card";
+@import "boxes";
+
+body {
+    background-color: #ebebeb;
+    font-family: 'Open Sans', sans-serif;
+}

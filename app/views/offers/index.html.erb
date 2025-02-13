@@ -1,7 +1,7 @@
 <div class="banner mb-4" style="height:33vh; background:url('https://tripswithrosie.com/wp-content/uploads/2023/01/Rome-Highlights-at-Sunrise-14.jpeg') center center / cover no-repeat;">
 </div>
 <div class="container">
-  <div class="index-title ps-2 pb-4">Available Tours</div>
+  <div class="index-title ps-2 pb-4 fw-bolder">Available Tours</div>
   <% @offers.each_slice(3) do |group| %>
     <div class="row">
       <% group.each do |offer| %>
@@ -11,4 +11,17 @@
       <% end %>
     </div>
   <% end %>
+</div>
+<div class="container">
+  <div class="row mb-5 mt-5">
+    <div class="col-6">
+      <div class="index-title fw-bolder ps-2">About the 2025 Jubilee</div>
+      <p class="ps-2">lorem ipsum dolor rolus lorem ipsum dolor roluslorem ipsum dolor roluslorem ipsum dolor roluslorem ipsum dolor roluslorem ipsum dolor roluslorem ipsum dolor roluslorem ipsum dolor roluslorem ipsum dolor rolus roluslorem ipsum dolor roluslorem ipsum dolor rolus roluslorem ipsum dolor roluslorem ipsum dolor rolus roluslorem ipsum dolor roluslorem ipsum dolor rolus roluslorem ipsum dolor roluslorem ipsum dolor rolus</p>
+    </div>
+    <div class="col-6">
+      <div style="height: 300px; border-radius: 1.3rem; background:url('https://tripswithrosie.com/wp-content/uploads/2023/01/Rome-Highlights-at-Sunrise-14.jpeg') center center / cover no-repeat;">
+        <!-- Add content for the right column here -->
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,9 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <div class="offer-details show-box p-3">
-        <h2 class="fw-bolder">Your Cart</h2>
-        <hr>
+      <div class="offer-details p-3">
+        <h2 class="fw-bolder ps-3">Your Cart</h2>
         <% @reservations.each do |reservation| %>
           <% offer = Offer.find(reservation.offer_id) %>
           <%= render partial: "cart_offer_card", locals: { offer: offer, reservation: reservation } %>
@@ -11,8 +10,9 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="show-box mt-4 p-3">
-        <h2 class="fw-bolder fs-4">Checkout</h2>
+      <div class="show-box p-3 mt-5">
+        <h2 class="fw-bolder fs-4 ">Checkout</h2>
+        <p>Total: 85$</p>
         <div class="text-center my-3">
           <%= button_to "Buy", root_path, method: :post, class: "btn btn-primary w-100" %>
         </div>

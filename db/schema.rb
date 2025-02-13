@@ -23,7 +23,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_11_121833) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.date "reservation_datetime"
+    t.date "reservation_date"
+    t.date "reservation_time"
     t.integer "number_of_adults"
     t.integer "number_of_children"
     t.bigint "offer_id", null: false

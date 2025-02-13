@@ -1,11 +1,10 @@
-@import "bootstrap/scss/bootstrap";
-@import url("https://cdn.jsdelivr.net/npm/tempusdominus-bootstrap-4@5.39.0/build/css/tempusdominus-bootstrap-4.min.css");
-
 $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
+@import "bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
 @import "@fortawesome/fontawesome-free/scss/regular";
 @import "@fortawesome/fontawesome-free/scss/solid";
 @import "@fortawesome/fontawesome-free/scss/brands";
+@import "bootstrap-datepicker/dist/css/bootstrap-datepicker";
 
 // Your custom imports
 @import "offer_card";
@@ -14,6 +13,6 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 @import "boxes";
 
 body {
-    background-color: #ebebeb;
+    background: #FFF3DD;
     font-family: 'Open Sans', sans-serif;
 }

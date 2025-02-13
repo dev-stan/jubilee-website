@@ -5,9 +5,9 @@ ruby "3.1.2"
 gem "sassc-rails"
 
 gem "bootstrap", "~> 5.3.0"
-gem "bootstrap-datepicker-rails"
-gem 'bootstrap-timepicker-rails'
-
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'bootstrap-datepicker-rails'
 gem 'rails_admin'
 
 

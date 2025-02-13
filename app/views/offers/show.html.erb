@@ -18,14 +18,24 @@
         <h2 class="fw-bolder fs-4">Rezerwacja</h2>
         <%= form_for [@offer, @reservation] do |f| %>
           <div class="mb-3">
-            <%= f.label :reservation_datetime, "Wybierz datę i godzinę" %>
-            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-              <%= f.text_field :reservation_datetime,
-                    class: "form-control datetimepicker-input",
-                    placeholder: "YYYY-MM-DD HH:mm",
-                    data: { target: "#datetimepicker1" } %>
-              <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-              </div>
+            <%= f.label :reservation_date, "Select date" %>
+            <%= f.text_field :reservation_date,
+        class: "form-control datepicker",
+        placeholder: "YYYY-MM-DD",
+        readonly: true,
+        data: { 
+          controller: "datepicker"
+        } %>
+          </div>
+          <div class="mb-3">
+            <%= f.label :reservation_time, "Select time" %>
+            <div class="d-flex gap-2">
+              <input type="radio" class="btn-check" name="reservation[time]" id="time-8" value="08:00" autocomplete="off">
+              <label class="btn btn-outline-primary w-100" for="time-8">8:00 AM</label>
+              <input type="radio" class="btn-check" name="reservation[time]" id="time-9" value="09:00" autocomplete="off">
+              <label class="btn btn-outline-primary w-100" for="time-9">9:00 AM</label>
+              <input type="radio" class="btn-check" name="reservation[time]" id="time-10" value="10:00" autocomplete="off">
+              <label class="btn btn-outline-primary w-100" for="time-10">10:00 AM</label>
             </div>
           </div>
           <div class="mb-3 d-flex align-items-center">
@@ -53,32 +63,13 @@
 <!-- Inline script for initializing Tempus Dominus -->
 <script>
   document.addEventListener("turbo:load", function() {
-  $('#datetimepicker1').datetimepicker({
-  format: 'YYYY-MM-DD HH:mm',
-  stepping: 15,
-  sideBySide: true,
-  allowInputToggle: true,
-  // Only allow these dates (use moment objects)
-  enabledDates: [
-    moment("2025-02-12", "YYYY-MM-DD"),
-    moment("2025-02-14", "YYYY-MM-DD")
-  ],
-  // Only allow these hours (24-hour format)
-  enabledHours: [10, 11, 12, 13, 14, 15],
-  icons: {
-    time: 'fas fa-clock',
-    date: 'fas fa-calendar',
-    up: 'fas fa-chevron-up',
-    down: 'fas fa-chevron-down',
-    previous: 'fas fa-chevron-left',
-    next: 'fas fa-chevron-right',
-    today: 'fas fa-sun',
-    clear: 'fas fa-trash',
-    close: 'fas fa-times'
-  }
-  });
-
-
-
+    $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd',
+      autoclose: true,
+      startDate: '2025-02-12',
+      endDate: '2025-12-31',
+      daysOfWeekDisabled: [0, 6], // Disable weekends
+      todayHighlight: true
+    });
   });
 </script>

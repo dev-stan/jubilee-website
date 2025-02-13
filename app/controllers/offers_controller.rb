@@ -7,6 +7,7 @@ class OffersController < ApplicationController
   def show
     @offer = Offer.find(params[:id])
     @reservation = @offer.reservations.new
+
   end
 
   def cart

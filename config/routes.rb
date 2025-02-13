@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   end
   get 'cart', to: 'carts#show'
   delete 'cart/reservations/:id', to: 'carts#destroy', as: :cart_reservation
+  post 'capture_order', to: 'orders#capture_order'
+
 
 end
  

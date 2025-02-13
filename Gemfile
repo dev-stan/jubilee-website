@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'rails_admin'
+gem 'dotenv-rails'
 
 
 gem "jquery-rails"

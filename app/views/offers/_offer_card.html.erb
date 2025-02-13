@@ -5,5 +5,19 @@
   </div>
   <div class="offer-card-body">
     <h2 class="offer-card-title"><%= offer.title %></h2>
+    <div class="meta-info d-flex flex-wrap gap-3 medium mt-2" style="color: rgb(67 71 75) !important">
+      <span>
+        <i class="fa-solid fa-clock me-1"></i>2 hours
+      </span>
+      <span>
+        <i class="fa-solid fa-language me-1"></i>English, Italian
+      </span>
+      <span>
+        <i class="fa-solid fa-user-group me-1"></i>Up to 15 people
+      </span>
+    </div>
+    <p class="offer-card-description medium mt-2" style="color: rgb(67 71 75)">
+      <%= truncate(offer.description, length: 100) || "Experience the spiritual journey through Rome's holiest sites with our expert guides." %>
+    </p>
   </div>
 </div>

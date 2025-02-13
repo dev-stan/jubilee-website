@@ -11,17 +11,41 @@
     </div>
     <div class="col-4">
       <div class="show-box p-3 mt-5">
-        <h2 class="fw-bolder fs-4 ">Checkout</h2>
-        <p>Total: 85$</p>
-        <div class="text-center my-3">
-          <%= button_to "Buy", root_path, method: :post, class: "btn btn-primary w-100" %>
-        </div>
+        <h2 class="fw-bolder fs-4">Checkout</h2>
+        <p>Total: $85</p>
+        <div id="paypal-button-container" class="text-center my-3"></div>
       </div>
       <div class="show-box mt-4 p-3">
         <h2 class="fw-bolder fs-4">Masz pytania?</h2>
         <p>Jeżeli masz pytania skontaktuj się z zespołem - zadzwoń po 881 228 832</p>
-        <i class="fas fa-trash-alt"></i>
       </div>
     </div>
   </div>
 </div>
+<script src="https://www.paypal.com/sdk/js?client-id=<%= ENV['PAYPAL_CLIENT_ID'] %>&currency=USD"></script>
+<script>
+  paypal.Buttons({
+    createOrder(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: '85.00' }
+        }]
+      });
+    },
+    onApprove(data, actions) {
+      return actions.order.capture().then(details => {
+        // Call Rails endpoint to record order
+        fetch("<%= capture_order_path %>", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': "<%= form_authenticity_token %>"
+          },
+          body: JSON.stringify({ orderID: data.orderID, details: details })
+        }).then(res => {
+          // Handle response (e.g., redirect or display message)
+        });
+      });
+    }
+  }).render('#paypal-button-container');
+</script>

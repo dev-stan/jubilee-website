@@ -1,7 +1,7 @@
-<div class="banner mb-4" style="height:33vh; background:url('https://tripswithrosie.com/wp-content/uploads/2023/01/Rome-Highlights-at-Sunrise-14.jpeg') center center / cover no-repeat;">
+<div class="banner mb-4" style="height:50vh; background:url('https://tripswithrosie.com/wp-content/uploads/2023/01/Rome-Highlights-at-Sunrise-14.jpeg') center center / cover no-repeat;">
 </div>
-<div class="container">
-  <div class="index-title ps-2 pb-4 fw-bolder">Available Tours</div>
+<div class="pt-5" style="padding-left: 200px; padding-right: 200px;">
+  <div class="index-title ps-2 fw-bolder pb-5">Available Tours</div>
   <% @offers.each_slice(3) do |group| %>
     <div class="row">
       <% group.each do |offer| %>
@@ -12,14 +12,20 @@
     </div>
   <% end %>
 </div>
-<div class="container">
+<div class="container pt-5">
   <div class="row mb-5 mt-5">
-    <div class="col-6">
-      <div class="index-title fw-bolder ps-2">About the 2025 Jubilee</div>
-      <p class="ps-2 pe-3">The 2025 Vatican Jubilee, also known as the Holy Year, is a significant event in the Catholic Church, celebrated every 25 years. It began on December 24, 2024, with Pope Francis opening the Holy Door at St. Peter's Basilica, symbolizing a passage to salvation. The theme for this Jubilee is "Pilgrims of Hope," encouraging the faithful to renew their faith and embrace hope. Throughout the year, millions of pilgrims are expected to visit Rome to participate in various religious events, seek spiritual renewal, and pass through the Holy Doors of the major basilicas. The Jubilee will conclude on January 6, 2026, with the closing of the Holy Door at St. Peter's Basilica.</p>
+    <div class="col-6 d-flex flex-column gap-4">
+      <div class="show-box p-5">
+        <div class="index-title fw-bolder ps-2 pb-4" style="color: rgb(223, 152, 22)">About the 2025 Jubilee</div>
+        <p class="ps-2 pe-3">The 2025 Vatican Jubilee, also known as the Holy Year, is a significant event in the Catholic Church, celebrated every 25 years. It began on December 24, 2024, with Pope Francis opening the Holy Door at St. Peter's Basilica, symbolizing a passage to salvation. The theme for this Jubilee is "Pilgrims of Hope," encouraging the faithful to renew their faith and embrace hope. Throughout the year, millions of pilgrims are expected to visit Rome to participate in various religious events, seek spiritual renewal, and pass through the Holy Doors of the major basilicas. The Jubilee will conclude on January 6, 2026, with the closing of the Holy Door at St. Peter's Basilica.</p>
+      </div>
+      <div class="show-box p-5">
+        <div class="index-title fw-bolder ps-2 pb-4" style="color: rgb(223, 152, 22)">How we operate</div>
+        <p class="ps-2 pe-3">The 2025 Vatican Jubilee, also known as the Holy Year, is a significant event in the Catholic Church, celebrated every 25 years. It began on December 24, 2024, with Pope Francis opening the Holy Door at St. Peter's Basilica, symbolizing a passage to salvation. The theme for this Jubilee is "Pilgrims of Hope," encouraging the faithful to renew their faith and embrace hope. Throughout the year, millions of pilgrims are expected to visit Rome to participate in various religious events, seek spiritual renewal, and pass through the Holy Doors of th</p>
+      </div>
     </div>
     <div class="col-6">
-      <div style="height: 300px; border-radius: 1.3rem; background:url('https://tripswithrosie.com/wp-content/uploads/2023/01/Rome-Highlights-at-Sunrise-14.jpeg') center center / cover no-repeat;">
+      <div style="height: 100%; border-radius: 1.3rem; background:url('https://tripswithrosie.com/wp-content/uploads/2023/01/Rome-Highlights-at-Sunrise-14.jpeg') center center / cover no-repeat;">
         <!-- Add content for the right column here -->
       </div>
     </div>

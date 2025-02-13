@@ -9,12 +9,12 @@
     <%= button_to cart_reservation_path(reservation), 
               method: :delete, 
               class: "offer-card-delete px-3", 
-              data: { confirm: "Remove from cart?" }, 
+              data: { turbo_confirm: "Remove from cart?" }, 
               style: "position: absolute; top: 13px; right: -100px;" do %>
       <i class="fa-solid fa-trash"></i>
     <% end %>
-    <p class="mb-1"><i class="fa-solid fa-calendar-days"></i> <span class="fw-bold">Date:</span> <%= reservation.reservation_datetime ? reservation.reservation_datetime.strftime("%B %d, %Y") : "N/A" %></p>
-    <p class="mb-1"><i class="fa-regular fa-clock"></i> <span class="fw-bold">Time:</span> <%= reservation.reservation_datetime ? reservation.reservation_datetime.strftime("%H:%M") : "N/A" %></p>
+    <p class="mb-1"><i class="fa-solid fa-calendar-days"></i> <span class="fw-bold">Date:</span> <%= reservation.reservation_date&.strftime("%B %d, %Y") || "N/A" %></p>
+    <p class="mb-1"><i class="fa-regular fa-clock"></i> <span class="fw-bold">Time:</span> <%= reservation.reservation_time&.strftime("%H:%M") || "N/A" %></p>
     <p class="mb-1"><i class="fa-solid fa-person"></i> <span class="fw-bold">Adult:</span> <%= reservation.number_of_adults || 0 %></p>
     <p class="mb-1"><i class="fa-solid fa-child"></i> <span class="fw-bold">Child:</span> <%= reservation.number_of_children || 0 %></p>
     <p class="mb-1"><i class="fa-solid fa-ban"></i> <span class="fw-bold">Non-refundable</span></p>

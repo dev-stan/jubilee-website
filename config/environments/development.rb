@@ -10,6 +10,8 @@ Rails.application.configure do
   config.assets.compile = true
   config.assets.digest = false
 
+  config.hosts << "ca9a-83-25-219-92.ngrok-free.app"
+  config.hosts << "ca9a-83-25-219-92.ngrok-free.app"
   # Do not eager load code on boot.
   config.eager_load = false
 

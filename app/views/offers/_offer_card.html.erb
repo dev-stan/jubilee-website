@@ -1,23 +1,20 @@
-<div class="offer-card">
+<div class="offer-card card h-100 border-light">
   <div class="position-relative">
     <%= link_to image_tag(offer.image_url, class: "offer-card-image"), offer_path(offer) %>
-    <%= link_to "From 89.99$", offer_path(offer), class: "btn offer-card-button fw-bold" %>
+    <%= link_to "From 89.99$", offer_path(offer), class: "btn btn-light btn-sm offer-card-button shadow-sm" %>
   </div>
-  <div class="offer-card-body">
-    <h2 class="offer-card-title"><%= offer.title %></h2>
-    <div class="meta-info d-flex flex-wrap gap-3 medium mt-2" style="color: rgb(67 71 75) !important">
-      <span>
-        <i class="fa-solid fa-clock me-1"></i>2 hours
-      </span>
-      <span>
-        <i class="fa-solid fa-language me-1"></i>English, Italian
-      </span>
-      <span>
-        <i class="fa-solid fa-user-group me-1"></i>Up to 15 people
-      </span>
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title fw-bold mb-3"><%= link_to offer.title, offer_path(offer), class: "text-decoration-none text-dark" %></h5>
+    <div class="meta-info mt-auto">
+      <div class="d-flex align-items-center mb-2">
+        <i class="fa-solid fa-clock me-2"></i>2 hours
+      </div>
+      <div class="d-flex align-items-center mb-2">
+        <i class="fa-solid fa-language me-2"></i>English, Italian
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="fa-solid fa-user-group me-2"></i>Up to 15 people
+      </div>
     </div>
-    <p class="offer-card-description medium mt-2" style="color: rgb(67 71 75)">
-      <%= truncate(offer.description, length: 100) || "Experience the spiritual journey through Rome's holiest sites with our expert guides." %>
-    </p>
   </div>
 </div>

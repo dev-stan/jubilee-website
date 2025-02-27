@@ -1,5 +1,8 @@
 .show-box {
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
     background-color: white;
-    border-radius: 1.3rem
+    border-radius: 1.3rem;
+    overflow-wrap: break-word;
+    word-wrap: break-word; /* For older browsers */
+    overflow: hidden;
 }

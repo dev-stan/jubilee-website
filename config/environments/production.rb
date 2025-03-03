@@ -93,10 +93,11 @@ Rails.application.configure do
   config.hosts = [
     "ca9a-83-25-219-92.ngrok-free.app",
     "ca9a-83-25-219-92.ngrok-free.app",
-    "https://jubilee-store-cd73a70a76f5.herokuapp.com/",
     "example.com",     # Allow requests from example.com
     /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
   ]
+
+  config.hosts << ".herokuapp.com" # Allow all Heroku subdomains
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end

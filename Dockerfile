@@ -1,74 +1,46 @@
 # syntax = docker/dockerfile:1
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.1.2
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+FROM ruby:$RUBY_VERSION-slim
 
-# Rails app lives here
-WORKDIR /rails
+# Set working directory
+WORKDIR /app
 
 # Set production environment
 ENV RAILS_ENV="production" \
+    BUNDLE_WITHOUT="development:test" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development:test"
+    LANG=C.UTF-8
 
-
-# Throw-away build stage to reduce size of final image
-FROM base as build
-
-# Install packages needed to build gems and node modules
+# Install system dependencies
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips node-gyp pkg-config python-is-python3
-
-# Install JavaScript dependencies
-ARG NODE_VERSION=16.15.1
-ARG YARN_VERSION=1.22.22
-ENV PATH=/usr/local/node/bin:$PATH
-RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
-    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
-    npm install -g yarn@$YARN_VERSION && \
-    rm -rf /tmp/node-build-master
+    apt-get install --no-install-recommends -y build-essential curl git libpq-dev \
+    nodejs npm postgresql-client && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --verbose && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
-
-# Install node modules
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN gem update --system && \
+    gem install bundler:2.3.7 && \
+    bundle install --jobs=4 --retry=3 && \
+    rm -rf /usr/local/bundle/cache
 
 # Copy application code
 COPY . .
 
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile --gemfile || echo "Bootsnap precompile failed but continuing"
+# Precompile bootsnap code for faster boot times (optional)
+RUN bundle exec bootsnap precompile app/ lib/ || echo "Bootsnap precompile failed but continuing"
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# Precompile assets
+RUN SECRET_KEY_BASE=dummy bundle exec rails assets:precompile
 
-
-# Final stage for app image
-FROM base
-
-# Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libvips postgresql-client && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
-
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
+# Add user
+RUN useradd rails --home /app --shell /bin/bash && \
+    chown -R rails:rails /app
 USER rails:rails
 
-# Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-
-# Start the server by default, this can be overwritten at runtime
+# Start the server
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

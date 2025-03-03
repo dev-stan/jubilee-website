@@ -3,6 +3,8 @@ source "https://rubygems.org"
 ruby "3.1.2"
 
 # CSS and styling
+# 
+gem 'nokogiri', '~> 1.17.0'
 gem "sassc-rails"
 gem "bootstrap", "~> 5.3.0"
 gem "font-awesome-sass", "~> 6.2.1"

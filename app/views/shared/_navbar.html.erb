@@ -1,8 +1,31 @@
-<nav class="navbar navbar-light bg-light py-4">
+<nav class="navbar py-4 shadow-sm" style="background-color:rgb(255, 184, 51)">
   <div class="container position-relative">
-    <%= link_to "JUBILEE", root_path, class: "navbar-brand position-absolute start-50 translate-middle-x" %>
+    <%= link_to root_path, class: "navbar-brand position-absolute fs-4 fw-bold start-50 translate-middle-x" do %>
+      jubilee2025.com <i class="fa-solid fa-hands-holding"></i>
+    <% end %>
     <div class="position-absolute end-0">
-      <a>🛒</a>
+      <%= link_to cart_path, class: "fs-3 text-dark cart-icon" do %>
+        <i class="fa-solid fa-cart-shopping"></i>
+      <% end %>
     </div>
   </div>
 </nav>
+<style>
+  .cart-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    animation: wobble 0.5s ease-in-out;
+    transform: scale(1.1);
+  }
+  }
+
+  @keyframes wobble {
+  0% { transform: scale(1.1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(-5deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+  75% { transform: scale(1.1) rotate(-3deg); }
+  100% { transform: scale(1.1) rotate(0deg); }
+  }
+</style>

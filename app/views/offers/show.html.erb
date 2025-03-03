@@ -1,84 +1,125 @@
-<%# app/views/offers/show.html.erb %>
 <% if @offer.image_url.present? %>
-  <div class="banner mb-4" style="height:33vh; background: url('<%= @offer.image_url %>') center center / cover no-repeat;"></div>
+  <div class="banner mb-4" style="height:25vh; background: url('<%= @offer.image_url %>') center center / cover no-repeat;"></div>
 <% end %>
 <div class="container">
   <div class="row">
-    <div class="col-8">
-      <div class="offer-details show-box p-3">
-        <h2 class="fw-bolder"><%= @offer.title %></h2>
-        <hr>
-        <div class="offer-description">
-          <p><%= @offer.description %></p>
+    <div class="col-lg-8 col-md-7 order-md-1 mb-4">
+      <div class="offer-details show-box p-3 p-sm-4">
+        <div class="d-flex justify-content-between align-items-center mb-3 mb-sm-4">
+          <h1 class="h4 fw-bold mb-0"><%= @offer.title %></h1>
+          <div>
+            <button type="button" id="share-button" class="btn btn-link p-0">
+              <i class="fa-solid fa-share-nodes fs-5 me-2 me-sm-3 text-dark"></i>
+            </button>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="show-box mt-4 p-3">
-        <h2 class="fw-bolder fs-4">Rezerwacja</h2>
-        <%= form_for [@offer, @reservation] do |f| %>
-          <div class="mb-3">
-            <%= f.label :reservation_datetime, "Wybierz datę i godzinę" %>
-            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-              <%= f.text_field :reservation_datetime,
-                    class: "form-control datetimepicker-input",
-                    placeholder: "YYYY-MM-DD HH:mm",
-                    data: { target: "#datetimepicker1" } %>
-              <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+        <div class="meta-info d-flex flex-wrap align-items-center mb-3 mb-sm-4">
+          <span class="me-2 me-sm-3 mb-1">
+            <i class="fa-solid fa-clock me-1 me-sm-2"></i>2 hours
+          </span>
+          <span class="me-2 me-sm-3 mb-1">
+            <i class="fa-solid fa-language me-1 me-sm-2"></i>English, Italian
+          </span>
+          <span class="mb-1">
+            <i class="fa-solid fa-user-group me-1 me-sm-2"></i>Up to 15 people
+          </span>
+        </div>
+        <hr>
+        <div class="offer-description my-3 my-sm-4">
+          <h4 class="h5 fw-bold mb-2 mb-sm-3">About this tour</h4>
+          <p class="text-secondary"><%= @offer.description %></p>
+        </div>
+        <div class="highlights mb-3 mb-sm-4">
+          <h4 class="h5 fw-bold mb-2 mb-sm-3">Tour Highlights</h4>
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <div class="d-flex align-items-center mb-2 mb-sm-3">
+                <i class="fa-solid fa-church fs-5 me-2 me-sm-3 text-primary"></i>
+                <span>Visit St. Peter's Basilica</span>
+              </div>
+              <div class="d-flex align-items-center mb-2 mb-sm-3">
+                <i class="fa-solid fa-door-open fs-5 me-2 me-sm-3 text-primary"></i>
+                <span>Pass through Holy Doors</span>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="d-flex align-items-center mb-2 mb-sm-3">
+                <i class="fa-solid fa-cross fs-5 me-2 me-sm-3 text-primary"></i>
+                <span>Special Jubilee Blessing</span>
+              </div>
+              <div class="d-flex align-items-center mb-2 mb-sm-3">
+                <i class="fa-solid fa-person-walking fs-5 me-2 me-sm-3 text-primary"></i>
+                <span>Guided Walking Tour</span>
               </div>
             </div>
           </div>
-          <div class="mb-3 d-flex align-items-center">
-            <div class="me-3">
-              <%= f.label :number_of_adults, "Liczba dorosłych" %>
-              <%= f.number_field :number_of_adults, class: "form-control", min: 0 %>
-            </div>
-            <div class="border-start ps-3">
-              <%= f.label :number_of_children, "Liczba dzieci" %>
-              <%= f.number_field :number_of_children, class: "form-control", min: 0 %>
-            </div>
-          </div>
-          <div class="text-center my-3">
-            <%= f.submit "Rezerwuj", class: "btn btn-primary w-100" %>
-          </div>
-        <% end %>
+        </div>
       </div>
-      <div class="show-box mt-4 p-3">
-        <h2 class="fw-bolder fs-4">Masz pytania?</h2>
-        <p>Jeżeli masz pytania skontaktuj się z zespołem - zadzwoń po 881 228 832</p>
+    </div>
+    <div class="col-lg-4 col-md-5 order-md-2">
+      <div class="show-box p-3 p-sm-4 shadow-sm" style="top: 1rem;">
+        <h4 class="h5 fw-bold mb-3 mb-sm-4">Book this tour</h4>
+        <%= form_for [@offer, @reservation] do |f| %>
+          <div class="mb-3">
+            <%= f.label :reservation_date, "Select date", class: "fw-medium mb-2" %>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fa-regular fa-calendar"></i></span>
+              <%= f.text_field :reservation_date,
+                  class: "form-control datepicker",
+                  placeholder: "YYYY-MM-DD",
+                  readonly: true,
+                  data: { controller: "datepicker" } %>
+            </div>
+          </div>
+          <div class="mb-3 mb-sm-4">
+            <%= f.label :reservation_time, "Select time", class: "fw-medium mb-2" %>
+            <div class="d-flex flex-sm-wrap gap-2">
+              <%= f.radio_button :reservation_time, "08:00:00", class: "btn-check", id: "time-8", autocomplete: "off" %>
+              <label class="btn btn-outline-primary flex-fill" for="time-8">8:00 AM</label>
+              <%= f.radio_button :reservation_time, "09:00:00", class: "btn-check", id: "time-9", autocomplete: "off" %>
+              <label class="btn btn-outline-primary flex-fill" for="time-9">9:00 AM</label>
+              <%= f.radio_button :reservation_time, "10:00:00", class: "btn-check", id: "time-10", autocomplete: "off" %>
+              <label class="btn btn-outline-primary flex-fill" for="time-10">10:00 AM</label>
+            </div>
+          </div>
+          <div class="mb-3 mb-sm-4">
+            <div class="row g-2 g-sm-3">
+              <div class="col-12 col-sm-6">
+                <%= f.label :number_of_adults, "Adults", class: "fw-medium mb-2" %>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                  <%= f.number_field :number_of_adults, class: "form-control", min: 0 %>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <%= f.label :number_of_children, "Children", class: "fw-medium mb-2" %>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="fa-solid fa-child"></i></span>
+                  <%= f.number_field :number_of_children, class: "form-control", min: 0 %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <%= f.submit "Reserve now", class: "btn btn-primary w-100 py-2 py-sm-3 fw-bold" %>
+        <% end %>
+        <div class="text-center mt-3 mt-sm-4">
+          <p class="text-muted small mb-0">
+            <i class="fa-solid fa-shield-halved me-2"></i>
+            Secure booking - we guarantee your spot
+          </p>
+        </div>
+      </div>
+      <div class="show-box mt-3 mt-sm-4 p-3 p-sm-4 shadow-sm">
+        <h5 class="h6 fw-bold mb-2 mb-sm-3">Need help?</h5>
+        <p class="small mb-2">
+          <i class="fa-solid fa-phone me-2 text-primary"></i>
+          Call us at 881 228 832
+        </p>
+        <p class="small mb-0">
+          <i class="fa-solid fa-envelope me-2 text-primary"></i>
+          Email: support@jubileetours.com
+        </p>
       </div>
     </div>
   </div>
 </div>
-<!-- Inline script for initializing Tempus Dominus -->
-<script>
-  document.addEventListener("turbo:load", function() {
-  $('#datetimepicker1').datetimepicker({
-  format: 'YYYY-MM-DD HH:mm',
-  stepping: 15,
-  sideBySide: true,
-  allowInputToggle: true,
-  // Only allow these dates (use moment objects)
-  enabledDates: [
-    moment("2025-02-12", "YYYY-MM-DD"),
-    moment("2025-02-14", "YYYY-MM-DD")
-  ],
-  // Only allow these hours (24-hour format)
-  enabledHours: [10, 11, 12, 13, 14, 15],
-  icons: {
-    time: 'fas fa-clock',
-    date: 'fas fa-calendar',
-    up: 'fas fa-chevron-up',
-    down: 'fas fa-chevron-down',
-    previous: 'fas fa-chevron-left',
-    next: 'fas fa-chevron-right',
-    today: 'fas fa-sun',
-    clear: 'fas fa-trash',
-    close: 'fas fa-times'
-  }
-  });
-
-
-
-  });
-</script>

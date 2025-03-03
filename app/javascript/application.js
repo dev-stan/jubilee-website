@@ -1,27 +1,18 @@
-import "jquery"
-import "tempusdominus-bootstrap-4";
+import "@hotwired/turbo-rails"
+import jQuery from "jquery"
+import "bootstrap"
+import "bootstrap-datepicker"
 
+// Make jQuery available globally before anything else
+window.$ = window.jQuery = jQuery
 
-
-import { Turbo } from "@hotwired/turbo-rails"
-Turbo.start()
-
-document.addEventListener("turbo:load", function() {
-    $('#datetimepicker1').datetimepicker({
-      format: 'YYYY-MM-DD HH:mm',
-      stepping: 15,
-      sideBySide: true,
-      icons: {
-        time: 'fas fa-clock',
-        date: 'fas fa-calendar',
-        up: 'fas fa-chevron-up',
-        down: 'fas fa-chevron-down',
-        previous: 'fas fa-chevron-left',
-        next: 'fas fa-chevron-right',
-        today: 'fas fa-sun',
-        clear: 'fas fa-trash',
-        close: 'fas fa-times'
-      }
-    });
-  });
-  
+document.addEventListener("turbo:load", () => {
+  $('.datepicker').datepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+    startDate: '2025-02-12',
+    endDate: '2025-12-31',
+    daysOfWeekDisabled: [0, 6],
+    todayHighlight: true
+  })
+})

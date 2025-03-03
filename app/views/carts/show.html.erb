@@ -1,9 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <div class="offer-details show-box p-3">
-        <h2 class="fw-bolder">Your Cart</h2>
-        <hr>
+      <div class="offer-details p-3">
+        <h2 class="fw-bolder ps-3">Your Cart</h2>
         <% @reservations.each do |reservation| %>
           <% offer = Offer.find(reservation.offer_id) %>
           <%= render partial: "cart_offer_card", locals: { offer: offer, reservation: reservation } %>
@@ -11,17 +10,51 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="show-box mt-4 p-3">
+      <div class="show-box p-3 mt-5">
         <h2 class="fw-bolder fs-4">Checkout</h2>
-        <div class="text-center my-3">
-          <%= button_to "Buy", root_path, method: :post, class: "btn btn-primary w-100" %>
-        </div>
+        <p>Total: $85</p>
+        <div id="paypal-button-container" class="text-center my-3"></div>
       </div>
       <div class="show-box mt-4 p-3">
-        <h2 class="fw-bolder fs-4">Masz pytania?</h2>
-        <p>Jeżeli masz pytania skontaktuj się z zespołem - zadzwoń po 881 228 832</p>
-        <i class="fas fa-trash-alt"></i>
+        <h2 class="fw-bolder fs-4">Need Help?</h2>
+        <div class="d-flex align-items-center mb-2">
+          <i class="fa-solid fa-phone text-primary me-2"></i>
+          <p class="mb-0">Call us: +1 881 228 832</p>
+        </div>
+        <div class="d-flex align-items-center">
+          <i class="fa-solid fa-envelope text-primary me-2"></i>
+          <p class="mb-0">Email: support@jubileetours.com</p>
+        </div>
+        <hr class="my-3">
+        <p class="small text-muted mb-0">Our customer service team is available Monday through Friday, 9:00 AM - 6:00 PM CET</p>
       </div>
     </div>
   </div>
 </div>
+<script src="https://www.paypal.com/sdk/js?client-id=<%= ENV['PAYPAL_CLIENT_ID'] %>&currency=EUR"></script>
+<script>
+  paypal.Buttons({
+    createOrder(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: '1.00' }
+        }]
+      });
+    },
+    onApprove(data, actions) {
+      return actions.order.capture().then(details => {
+        // Call Rails endpoint to record order
+        fetch("https://ca9a-83-25-219-92.ngrok-free.app<%= capture_order_path %>", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': "<%= form_authenticity_token %>"
+          },
+          body: JSON.stringify({ orderID: data.orderID, details: details })
+        }).then(res => {
+          // Handle response (e.g., redirect or display message)
+        });
+      });
+    }
+  }).render('#paypal-button-container');
+</script>

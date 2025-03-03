@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 ruby "3.1.2"
+gem 'bundler', '~> 2.6.5'
 
 # CSS and styling
 # 

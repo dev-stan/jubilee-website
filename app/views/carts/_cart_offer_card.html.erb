@@ -1,22 +1,23 @@
-<div class="offer-card d-flex" style="border: 1px solid #ddd; border-radius: 0.5rem; overflow: hidden; margin-bottom: 1rem; height: 250px;">
-  <div style="flex: 0 0 50.67%; height: 100%;">
+<div class="cart-offer-card d-flex" style="border: 1px solid #ddd; border-radius: 0.5rem; overflow: hidden; margin-bottom: 1rem; height: 250px; background: white;">
+  <div class="card-image-container">
     <%= link_to offer_path(offer) do %>
       <%= image_tag offer.image_url, style: "width: 100%; height: 100%; object-fit: cover;" %>
     <% end %>
   </div>
-  <div class="p-3" style="flex: 0 0 33.33%; height: 100%; position: relative;">
-    <h2 class="offer-card-title mb-3"><%= offer.title %></h2>
+  <div class="card-content p-3">
+    <h2 class="offer-card-title fs-5 mb-3"><%= offer.title %></h2>
     <%= button_to cart_reservation_path(reservation), 
               method: :delete, 
               class: "offer-card-delete px-3", 
-              data: { turbo_confirm: "Remove from cart?" }, 
-              style: "position: absolute; top: 13px; right: -100px;" do %>
+              data: { turbo_confirm: "Remove from cart?" } do %>
       <i class="fa-solid fa-trash"></i>
     <% end %>
-    <p class="mb-1"><i class="fa-solid fa-calendar-days"></i> <span class="fw-bold">Date:</span> <%= reservation.reservation_date&.strftime("%B %d, %Y") || "N/A" %></p>
-    <p class="mb-1"><i class="fa-regular fa-clock"></i> <span class="fw-bold">Time:</span> <%= reservation.reservation_time&.strftime("%H:%M") || "N/A" %></p>
-    <p class="mb-1"><i class="fa-solid fa-person"></i> <span class="fw-bold">Adult:</span> <%= reservation.number_of_adults || 0 %></p>
-    <p class="mb-1"><i class="fa-solid fa-child"></i> <span class="fw-bold">Child:</span> <%= reservation.number_of_children || 0 %></p>
-    <p class="mb-1"><i class="fa-solid fa-ban"></i> <span class="fw-bold">Non-refundable</span></p>
+    <div class="reservation-details">
+      <p class="mb-1"><i class="fa-solid fa-calendar-days"></i> <span class="fw-bold">Date:</span> <%= reservation.reservation_date&.strftime("%B %d, %Y") || "N/A" %></p>
+      <p class="mb-1"><i class="fa-regular fa-clock"></i> <span class="fw-bold">Time:</span> <%= reservation.reservation_time&.strftime("%H:%M") || "N/A" %></p>
+      <p class="mb-1"><i class="fa-solid fa-person"></i> <span class="fw-bold">Adult:</span> <%= reservation.number_of_adults || 0 %></p>
+      <p class="mb-1"><i class="fa-solid fa-child"></i> <span class="fw-bold">Child:</span> <%= reservation.number_of_children || 0 %></p>
+      <p class="mb-1"><i class="fa-solid fa-ban"></i> <span class="fw-bold">Non-refundable</span></p>
+    </div>
   </div>
 </div>
